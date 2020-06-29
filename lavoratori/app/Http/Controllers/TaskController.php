@@ -1,4 +1,4 @@
-<?php
+<?phpattach
 
 namespace App\Http\Controllers;
 
