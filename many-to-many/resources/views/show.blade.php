@@ -10,8 +10,21 @@
   <ul>
     @foreach ($employee -> tasks as $task)
       <li>
-        {{$task -> name}} : {{$task -> description}}. (<b>DEADLINE:</b> {{$task -> deadline}})
+        {{$task['name']}} : {{$task['description']}}. (<b>DEADLINE:</b> {{$task['deadline']}})
       </li>
     @endforeach
   </ul>
+
+  <h1>City:</h1>
+  <ul>
+    @foreach ($employee -> locations as $location)
+      <li>
+        {{$location['city']}}
+      </li>
+    @endforeach
+  </ul>
+
+  <a href="{{route('edit', $employee['id'])}}">EDITA DIPENDENTE</a>
+  <br>
+  <a href="{{route('delete', $employee['id'])}}">CANCELLA DIPENDENTE</a>
 @endsection

@@ -18,22 +18,39 @@ class EmployeeController extends Controller
     return view('show', compact('employee'));
   }
 
-  // public function edit($id){
+  public function edit($id){
+    $employee = Employee::findOrFail($id);
+    $locations = Location::all();
+
+    return view('edit', compact('employee','locations'));
+  }
   //
-  //
-  //   return view('', compact());
-  // }
-  //
-  // public function updateTask(Request $request , $id){
-  //
-  //   $validateData = $request -> validate([
-  //       '' => 'required',
-  //       '' => 'required',
-  //       '' => 'required',
-  //       '' => 'required',
-  //     ]);
-  //
-  //   Task::whereId($id) -> update($validateData);
-  //   return redirect() -> route('home');
-  // }
+  public function update(Request $request , $id){
+
+    $validateData = $request -> validate([
+        'firstname' => 'required',
+        'lastname' => 'required',
+        'dateOfBirth' => 'required',
+        'role' => 'required',
+        'locations' => 'required'
+      ]);
+
+      $employee = Employee::findOrFail($id);
+
+      $employee->locations()->sync($validateData['locations']);
+
+
+      $employee-> update($validateData);
+      
+
+
+    return redirect() -> route('home');
+  }
+
+  public function delete($id){
+    $employee = Employee::findOrFail($id);
+
+    $employee -> delete();
+    return redirect() -> route('home');
+  }
 }

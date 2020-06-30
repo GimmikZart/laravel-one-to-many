@@ -17,8 +17,12 @@ class TasksSeeder extends Seeder
     {
         factory(Task::Class, 50) -> make() -> each(function($task){
           $employee = Employee::inRandomOrder() -> first();
+
           $task -> employee() -> associate($employee);
+
           $task -> save();
+
+
         });
     }
 }
